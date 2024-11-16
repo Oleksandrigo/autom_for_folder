@@ -1,0 +1,30 @@
+## blacklist
+d-art,act
+spaga,spaca
+spaga,plaga
+anaru,kanauru
+blackjr,balak
+midnightsfm,midnightswamie
+cyberframe,wyerframez
+
+## whitelist
+amateurthrowaway,amateur_throwaway
+batesz,batesz2
+wanksy,wansky
+bonkdoge_3d,bonkge_3d
+kokoboro,kokoborohen
+shiina_ecchigawa,shiina_ecchi
+re_mmd,reimo
+kamuo,taihai
+shinki_art,shinki
+thehoaxxx,hoaxxx
+suhee,suhe
+noramo64,noramo
+kirameku_hoshi,kiramekuhoshi
+maiden-masher,maiden_masher
+玲萌ファンクラブ,reimo
+re_mmd,玲萌ファンクラブ
+yves_bigerel,balak
+icedev,1cedev
+scarecraw,scarecraw_
+magmallow,mag_mallow

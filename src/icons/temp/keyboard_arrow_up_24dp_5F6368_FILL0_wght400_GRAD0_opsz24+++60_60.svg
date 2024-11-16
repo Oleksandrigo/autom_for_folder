@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="21.1667mm" height="21.1667mm"
+ viewBox="0 0 60 60"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  version="1.2" baseProfile="tiny">
+<title>Qt SVG Document</title>
+<desc>Generated with Qt</desc>
+<defs>
+</defs>
+<g fill="none" stroke="black" stroke-width="1" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="bevel" >
+
+<image x="0" y="0" width="60" height="60" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAoElEQVRoge3RQQ6DMAxEUcLJOJo5+bChUlUBISRpsPXfFsWaL6YJAAAAAAAAQJYkk2Sjd/zFHvtho/d09RMbO/okNmZ0JjZW9M3YGNGFsb6jM7GW+z56f5G7MSGiSyNcRz8d7zK6drSr6FZjXUS3Hvnq6F7jekbPNY8vrCkle/p4f7s2W9PSwd8wD7erfA0zT7erSFo83gYAAAAAAADwMhumOwrIjtouwgAAAABJRU5ErkJggg==" />
+</g>
+</svg>

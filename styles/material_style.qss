@@ -1,0 +1,19 @@
+* {
+    font-family: 'Roboto';
+    color: #FFFFFF;
+}
+
+#StandardBackground {
+    background-color: #121212;
+}
+
+#EmptyFolderFinderLog {
+    background-color: #1F1F1F;
+    color: #E0E0E0;
+    border: 1px solid #2196F3;
+    padding: 10px;
+    border-radius: 4px;
+}
+#EFF_LabelPath {
+    background-color: rgba(0, 0, 0, 0);
+}
