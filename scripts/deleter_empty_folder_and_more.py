@@ -11,7 +11,11 @@ TRASH_MD5_HASHES: Set[str] = {"b325d6ba8efb828686667aa58ab549e8"}
 BLACKLIST_KEYWORDS: Set[str] = {"voice_actor", "voiceactor", "voice-actor"}
 
 
-def save_black_list(data: Dict[str, List[str]]) -> None:
+def save_black_list(data: Dict[str, List[str]], fake_delete: bool = False) -> None:
+    if fake_delete:
+        print("Was NOT saved because fake_delete is True")
+        return
+
     with open(BLACKLIST_FILE, encoding="utf-8", mode="w") as f:
         for type, _data in data.items():
             f.write(f"#{type}\n")
@@ -20,16 +24,13 @@ def save_black_list(data: Dict[str, List[str]]) -> None:
 
 def delete_from_black_list(category: str, artist: str, fake_delete: bool = True) -> Dict[str, List[str]]:
     list_data = get_bl_artist()
-    
-    if fake_delete:
-        print(f"Was NOT deleted {artist=} from {category=} because fake_delete is True")
-        return list_data
-    
     list_data[category].remove(artist)
-    save_black_list(list_data)
+
+    save_black_list(list_data, fake_delete)
+    
     return list_data
 
-def get_bl_artist(add: str = None) -> Dict[str, List[str]]: 
+def get_bl_artist(add: str = None, category: str = "VA", fake_delete: bool = False) -> Dict[str, List[str]]: 
     data = {"VA": [], "Other": []}
     try:
         with open(BLACKLIST_FILE, encoding="utf-8") as f:
@@ -43,13 +44,12 @@ def get_bl_artist(add: str = None) -> Dict[str, List[str]]:
     except FileNotFoundError:
         with open(BLACKLIST_FILE, encoding="utf-8", mode="w") as f:
             f.write("#VA\n#Other\n")
-            data = {"VA": [], "Other": []}
 
     data_black_list = {k: list(map(fix_folder_name, v)) for k, v in data.items()}
     
     if add:
-        data_black_list.setdefault("VA", []).append(fix_folder_name(add))
-        save_black_list(data_black_list)
+        data_black_list.setdefault(category, []).append(fix_folder_name(add))
+        save_black_list(data_black_list, fake_delete)
 
     return data_black_list
 

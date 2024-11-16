@@ -7,6 +7,7 @@ from PyQt5.QtGui import QFontDatabase, QFont, QIcon, QPixmap, QColor, QPainter
 from PyQt5.QtSvg import QSvgGenerator
 
 
+
 class QSizeFloat:
     width: float
     height: float
@@ -30,6 +31,7 @@ class QSizeFloat:
     def recalculate(self) -> None:
         if self.recalculate_method:
             self.width, self.height = self.recalculate_method()
+
 
 def get_index_in_layout(widget: QWidget) -> int:
     parent: QLayout = widget.parent()

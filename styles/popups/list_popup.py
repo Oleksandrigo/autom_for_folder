@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget
 from PyQt5.QtCore import Qt, QPoint, QMargins
 
 from main_window import MainWindow
+from scripts.deleter_empty_folder_and_more import get_bl_artist
 from styles.popups.accept_popup import AcceptPopup
 from styles.popups.base_popup import BasePopup, Position
 from styles.popups.input_popup import InputPopup
@@ -41,8 +42,16 @@ class ListPopup(BasePopup):
         self.title.setStyleSheet("font-size: 18px; color: #FFFFFF;")
         self.content_layout.addWidget(self.title)
 
+        self.vbox_pre_choise_layout = QVBoxLayout()
+        self.content_layout.addLayout(self.vbox_pre_choise_layout)
+
+        self.add_button = MaterialIconPushButton(text="+", special=True)
+        self.add_button.setFixedHeight(30)
+        self.add_button.clicked.connect(self.add_item)
+        self.vbox_pre_choise_layout.addWidget(self.add_button)
+
         self.hbox_choise_layout = QHBoxLayout()
-        self.content_layout.addLayout(self.hbox_choise_layout)
+        self.vbox_pre_choise_layout.addLayout(self.hbox_choise_layout)
 
         if isinstance(self.list_data, dict):
             for category in self.list_data.keys():
@@ -53,12 +62,6 @@ class ListPopup(BasePopup):
                 choise_button.setFixedHeight(30)
                 choise_button.clicked.connect(partial(self.choise_button_clicked, category))
                 self.hbox_choise_layout.addWidget(choise_button)
-
-        self.add_button = MaterialIconPushButton(text="Add")
-        self.add_button.setFixedHeight(30)
-        self.add_button.clicked.connect(self.add_item)
-        self.hbox_choise_layout.addWidget(self.add_button)
-
 
         self.scroll_area = MaterialScrollArea()
         self.scroll_area.setWidgetResizable(True)
@@ -108,9 +111,15 @@ class ListPopup(BasePopup):
     
     def add_item(self) -> None:
         def add_item_callback(item: str) -> None:
-            print(item)
+            current_category = self.get_current_category()
+            get_bl_artist(item, current_category, fake_delete=MainWindow.get_main_window(self).fake_delete)
 
-        input_popup = InputPopup(MainWindow.get_main_window(self), accept_connect=add_item_callback, title="Add item", block_overlay=True, position=Position.CENTER)
+        input_popup = InputPopup(
+            MainWindow.get_main_window(self), 
+            accept_connect=add_item_callback, 
+            title="Add item", 
+            position=Position.CENTER
+        )
         input_popup.show()
 
     
@@ -129,6 +138,7 @@ class ListPopup(BasePopup):
             self.list_data = self.remove_callback(category, item, fake_delete)
                 
     def move_to_another_category(self, item: str) -> None:
+        # TODO: создать окно для выбора категории
         print(item)
     
     def get_current_category(self) -> str | None:

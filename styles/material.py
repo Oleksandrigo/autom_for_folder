@@ -111,8 +111,12 @@ class MaterialScrollArea(QScrollArea, MaterialColor):
 
 
 class MaterialLineEdit(QLineEdit, MaterialColor):
-    def __init__(self, parent = None) -> None:
+    def __init__(self, parent = None, **kwargs) -> None:
         super().__init__(parent)
+
+        font_size = kwargs.get("font_size", 16)
+        padding = kwargs.get("padding", 12)
+        border_radius = kwargs.get("border_radius", 4)
 
         self.setObjectName("MaterialLineEdit")
         self.setStyleSheet(f"""
@@ -120,9 +124,9 @@ class MaterialLineEdit(QLineEdit, MaterialColor):
                 background-color: {self.primary_text_color};
                 color: {self.text_color};
                 border: 1px solid {self.primary_color};
-                padding: 12px;
-                border-radius: 4px;
-                font-size: 16px;
+                padding: {padding}px;
+                border-radius: {border_radius}px;
+                font-size: {font_size}px;
             }}  
             QLineEdit:focus {{
                 border: 2px solid {self.pressed_accent_color};
