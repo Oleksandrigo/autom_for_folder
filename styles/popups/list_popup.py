@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt, QPoint, QMargins
 from main_window import MainWindow
 from styles.popups.accept_popup import AcceptPopup
 from styles.popups.base_popup import BasePopup, Position
+from styles.popups.input_popup import InputPopup
 from styles.material import MaterialColor, MaterialIconPushButton, MaterialScrollArea
 import utils as U
 
@@ -17,7 +18,7 @@ class ListPopup(BasePopup):
             parent, 
             title: str, 
             list_data: List[str] | Dict[str, List[str]],
-            remove_tool: Callable[[str, str, bool | None], List[str] | Dict[str, List[str]]],
+            remove_callback: Callable[[str, str, bool | None], List[str] | Dict[str, List[str]]],
             no_overlay: bool = False,
             block_overlay: bool = False,
             position: Optional[QPoint | Position] = Position.CENTER,
@@ -27,7 +28,7 @@ class ListPopup(BasePopup):
         super().__init__(parent, no_overlay=no_overlay, block_overlay=block_overlay, position=position, margins=margins, size=size)
 
         self.list_data = list_data
-        self.remove_tool = remove_tool
+        self.remove_callback = remove_callback
 
         self.content_layout = QVBoxLayout()
         self.content_layout.setContentsMargins(10, 10, 10, 10)
@@ -52,6 +53,11 @@ class ListPopup(BasePopup):
                 choise_button.setFixedHeight(30)
                 choise_button.clicked.connect(partial(self.choise_button_clicked, category))
                 self.hbox_choise_layout.addWidget(choise_button)
+
+        self.add_button = MaterialIconPushButton(text="Add")
+        self.add_button.setFixedHeight(30)
+        self.add_button.clicked.connect(self.add_item)
+        self.hbox_choise_layout.addWidget(self.add_button)
 
 
         self.scroll_area = MaterialScrollArea()
@@ -100,6 +106,14 @@ class ListPopup(BasePopup):
             move_button.clicked.connect(partial(self.move_to_another_category, item))
             hbox.addWidget(move_button)
     
+    def add_item(self) -> None:
+        def add_item_callback(item: str) -> None:
+            print(item)
+
+        input_popup = InputPopup(MainWindow.get_main_window(self), accept_connect=add_item_callback, title="Add item", block_overlay=True, position=Position.CENTER)
+        input_popup.show()
+
+    
     def delete_item(self, item: str, fake_delete: bool = True) -> None:
         def del_help(_item: str) -> bool:
             hboxes = self.scroll_layout.children()
@@ -112,7 +126,7 @@ class ListPopup(BasePopup):
 
         if del_help(item):
             category = self.get_current_category()
-            self.list_data = self.remove_tool(category, item, fake_delete)
+            self.list_data = self.remove_callback(category, item, fake_delete)
                 
     def move_to_another_category(self, item: str) -> None:
         print(item)

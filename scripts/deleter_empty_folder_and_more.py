@@ -12,7 +12,6 @@ BLACKLIST_KEYWORDS: Set[str] = {"voice_actor", "voiceactor", "voice-actor"}
 
 
 def save_black_list(data: Dict[str, List[str]]) -> None:
-    print(1)
     with open(BLACKLIST_FILE, encoding="utf-8", mode="w") as f:
         for type, _data in data.items():
             f.write(f"#{type}\n")
@@ -21,14 +20,13 @@ def save_black_list(data: Dict[str, List[str]]) -> None:
 
 def delete_from_black_list(category: str, artist: str, fake_delete: bool = True) -> Dict[str, List[str]]:
     list_data = get_bl_artist()
-    list_data[category].remove(artist)
-
+    
     if fake_delete:
         print(f"Was NOT deleted {artist=} from {category=} because fake_delete is True")
         return list_data
     
+    list_data[category].remove(artist)
     save_black_list(list_data)
-
     return list_data
 
 def get_bl_artist(add: str = None) -> Dict[str, List[str]]: 
