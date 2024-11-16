@@ -20,9 +20,7 @@ class BlackListFinderView(BaseView):
         super().__init__("Black List Finder", parent)
 
         self.add_button("back")
-        black_list_manger_button = MaterialIconButton(self, icon_file="settings_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg")
-        black_list_manger_button.clicked.connect(self.show_black_list_manager)
-        self.add_button(black_list_manger_button, postion_left=False)
+        self.add_button("black_list_manager", postion_left=False)
         
         data = U.load_data()
         path = data.setdefault("BLF_last_path", "")
@@ -235,11 +233,3 @@ class BlackListFinderView(BaseView):
                 print(f"{e=}`")
         
         self.delete_button.setDisabled(True)
-
-    def show_black_list_manager(self) -> None:
-        black_list: Dict[Literal["VA", "Other"], List[str]] = get_bl_artist()
-        list_popup = ListPopup(self, "Black List Manager", black_list, delete_from_black_list, position=Position.CENTER, size=QSizeFloat(0.4, 0.8))
-        list_popup.show()
-
-
-        

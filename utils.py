@@ -11,13 +11,13 @@ from PyQt5.QtSvg import QSvgGenerator
 class QSizeFloat:
     width: float
     height: float
-    recalculate_method: Optional[Callable[[float, float], Tuple[float, float]]] = None
+    recalculate_method: Optional[Callable[[], Tuple[float, float]]] = None
 
     def __init__(
             self, 
             width: float, 
             height: float, 
-            recalculate_method: Optional[Callable[[float, float], Tuple[float, float]]] = None
+            recalculate_method: Optional[Callable[[], Tuple[float, float]]] = None
         ) -> None:
         self.width = width
         self.height = height
@@ -51,8 +51,7 @@ def load_data() -> Dict:
             with open("data.json", "r", encoding="utf-8") as f:
                 return json.load(f)
     except (IOError, json.JSONDecodeError) as e:
-        pass
-    return {}
+        return {}
 
 def save_data(data: Dict) -> None:
     with open("data.json", "w", encoding="utf-8") as f:

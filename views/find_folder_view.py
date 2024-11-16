@@ -17,6 +17,7 @@ class FindFolderView(BaseView):
 
         self.add_button("back")
         self.add_button("history", postion_left=False)
+        self.add_button("black_list_manager", postion_left=False)
 
         self.setAcceptDrops(True)
         self.height_input_field_and_accept_button: int = 50

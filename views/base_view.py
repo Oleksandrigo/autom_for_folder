@@ -29,7 +29,7 @@ class BaseView(QWidget):
         self.header: HeaderWidget = HeaderWidget(title, self)
         self.base_layout.addWidget(self.header)
     
-    def add_button(self, button: MaterialIconButton | Literal["back", "history"], postion_left: bool = True) -> None:
+    def add_button(self, button: MaterialIconButton | Literal["back", "history", "black_list_manager"], postion_left: bool = True) -> None:
         self.header.add_button(button, postion_left)
     
     def clear_layout(self):

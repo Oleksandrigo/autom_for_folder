@@ -1,8 +1,11 @@
-from typing import Callable, Dict, Literal, Tuple
+from typing import Callable, Dict, List, Literal, Tuple
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt5.QtCore import Qt
 
+from scripts.deleter_empty_folder_and_more import delete_from_black_list, get_bl_artist
 from styles.material import MaterialIconButton, MaterialColor
+from styles.popups.base_popup import Position
+from styles.popups.list_popup import ListPopup
 import utils as U
 
 
@@ -61,6 +64,7 @@ class HeaderWidget(QWidget, MaterialColor):
         buttons_data: Dict[str, Tuple[str, Callable]] = {
             "back": ("arrow_back_24dp_5F6368_FILL0_wght700_GRAD200_opsz24.svg", lambda: self.main_window.change_view(self.main_window.main_view)),
             "history": ("history_24dp_5F6368_FILL0_wght700_GRAD200_opsz24.svg", lambda: self.main_window.show_history_view()),
+            "black_list_manager": ("settings_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg", lambda: self.main_window.show_black_list_manager())
         }
 
         if _button in buttons_data:

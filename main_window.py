@@ -1,4 +1,4 @@
-from typing import Callable, List, Optional, TYPE_CHECKING
+from typing import Callable, Dict, List, Literal, Optional, TYPE_CHECKING
 
 from PyQt5.QtWidgets import QMainWindow, QStackedWidget, QApplication
 from PyQt5.QtCore import QSize, QObject, QRect, QPoint, QMargins
@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from views.base_view import BaseView
     from styles.material import MaterialIconButton
 
+from scripts.deleter_empty_folder_and_more import delete_from_black_list, get_bl_artist
 from utils import QSizeFloat, deduplicator
 
 class MainWindow(QMainWindow):
@@ -117,3 +118,10 @@ class MainWindow(QMainWindow):
         self.search_history = deduplicator(self.search_history)
         if len(self.search_history) > 10:
             self.search_history.pop()
+
+    def show_black_list_manager(self) -> None:
+        from styles.popups.base_popup import Position
+        from styles.popups.list_popup import ListPopup
+        black_list: Dict[Literal["VA", "Other"], List[str]] = get_bl_artist()
+        list_popup = ListPopup(self, "Black List Manager", black_list, delete_from_black_list, position=Position.CENTER, size=QSizeFloat(0.4, 0.8))
+        list_popup.show()
