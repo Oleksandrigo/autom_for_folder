@@ -131,4 +131,5 @@ class ListPopup(BasePopup):
                 child.setDisabled(True)
             else:
                 child.setDisabled(False)
-                self.update_layout(s
+                self.update_layout(self.list_data if isinstance(self.list_data, list) else self.list_data[choise])
+
