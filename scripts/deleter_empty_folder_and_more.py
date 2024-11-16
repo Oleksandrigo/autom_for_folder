@@ -24,8 +24,7 @@ def delete_from_black_list(category: str, artist: str, fake_delete: bool = True)
     list_data[category].remove(artist)
 
     if fake_delete:
-        print(artist)
-        pprint(list_data)
+        print(f"Was NOT deleted {artist=} from {category=} because fake_delete is True")
         return list_data
     
     save_black_list(list_data)
