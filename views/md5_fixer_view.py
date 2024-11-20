@@ -112,6 +112,7 @@ class Md5FixerView(BaseView):
             self.log_widget.setText(f"{self.log_widget.text()}{log}\n")
 
         def stop_scan(self: "Md5FixerView", accept_popup: AcceptPopup) -> None:
+            self.start_button.setDisabled(False)
             accept_popup.loop.quit()
             accept_popup.hide_popup()
             nonlocal _stop_scan
