@@ -1,12 +1,16 @@
-from typing import Callable, Dict, List, Literal, Tuple
+from enum import Enum
+from typing import Callable, Dict, Tuple
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt5.QtCore import Qt
 
-from scripts.deleter_empty_folder_and_more import delete_from_black_list, get_bl_artist
 from styles.material import MaterialIconButton, MaterialColor
-from styles.popups.base_popup import Position
-from styles.popups.list_popup import ListPopup
 import utils as U
+
+class HeaderButtons(Enum):
+    BACK = "back"
+    HISTORY = "history"
+    BL_MANAGER = "black_list_manager"
+
 
 
 class HeaderWidget(QWidget, MaterialColor):
@@ -60,11 +64,11 @@ class HeaderWidget(QWidget, MaterialColor):
         self.content_layout.addWidget(self.title_label, 1)
         
     
-    def add_button(self, _button: MaterialIconButton | Literal["back", "history"], postion_left: bool = True) -> None:
+    def add_button(self, _button: MaterialIconButton | HeaderButtons, postion_left: bool = True) -> None:
         buttons_data: Dict[str, Tuple[str, Callable]] = {
-            "back": ("arrow_back_24dp_5F6368_FILL0_wght700_GRAD200_opsz24.svg", lambda: self.main_window.change_view(self.main_window.main_view)),
-            "history": ("history_24dp_5F6368_FILL0_wght700_GRAD200_opsz24.svg", lambda: self.main_window.show_history_view()),
-            "black_list_manager": ("settings_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg", lambda: self.main_window.show_black_list_manager())
+            HeaderButtons.BACK: ("arrow_back_24dp_5F6368_FILL0_wght700_GRAD200_opsz24.svg", lambda: self.main_window.change_view(self.main_window.main_view)),
+            HeaderButtons.HISTORY: ("history_24dp_5F6368_FILL0_wght700_GRAD200_opsz24.svg", lambda: self.main_window.show_history_view()),
+            HeaderButtons.BL_MANAGER: ("settings_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg", lambda: self.main_window.show_black_list_manager())
         }
 
         if _button in buttons_data:

@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt, QSize, QEvent
 from PyQt5.QtGui import QColor, QFont
 
 from scripts.deleter_empty_folder_and_more import del_from_path, find_empty_folders
+from styles.header import HeaderButtons
 from styles.material import MaterialColor, MaterialIconButton, MaterialIconPushButton, MaterialLineEdit, MaterialScrollArea, MaterialIconCheckbox
 from views import BaseView
 import utils as U
@@ -16,7 +17,7 @@ class EmptyFoldersFinderView(BaseView):
     def __init__(self, parent) -> None:
         super().__init__("Empty Folders Finder", parent)
 
-        self.add_button("back")
+        self.add_button(HeaderButtons.BACK)
         
         data = U.load_data()
         path = data.setdefault("EFF_last_path", "")

@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from PyQt5.QtCore import Qt
 
 from styles.material import MaterialIconButton
-from styles.header import HeaderWidget
+from styles.header import HeaderButtons, HeaderWidget
 
 class BaseView(QWidget):
     main_window: 'MainWindow'
@@ -29,7 +29,7 @@ class BaseView(QWidget):
         self.header: HeaderWidget = HeaderWidget(title, self)
         self.base_layout.addWidget(self.header)
     
-    def add_button(self, button: MaterialIconButton | Literal["back", "history", "black_list_manager"], postion_left: bool = True) -> None:
+    def add_button(self, button: MaterialIconButton | HeaderButtons, postion_left: bool = True) -> None:
         self.header.add_button(button, postion_left)
     
     def clear_layout(self):

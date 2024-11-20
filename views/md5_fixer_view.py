@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget, QVBoxLayout, QSizePoli
 from PyQt5.QtCore import Qt, QSize
 
 from scripts.md5_fixer import Config, delete_file, get_md5, rename_file, save_to_sqlite
+from styles.header import HeaderButtons
 from styles.material import MaterialColor, MaterialIconPushButton, MaterialScrollArea
 from styles.popups import AcceptPopup
 from styles.popups.accept_popup import ExtraButton
@@ -15,7 +16,7 @@ class Md5FixerView(BaseView):
     def __init__(self, parent) -> None:
         super().__init__("MD5 Fixer", parent)
 
-        self.add_button("back")
+        self.add_button(HeaderButtons.BACK)
 
         self.hbox: QHBoxLayout = QHBoxLayout()
         self.hbox.setContentsMargins(10, 10, 10, 10)

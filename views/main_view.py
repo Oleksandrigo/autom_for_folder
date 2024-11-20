@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QVBoxLayout, QSizePolicy, QHBoxLayout, QWidget
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 from PyQt5.QtCore import Qt, QSize
 
 from styles.material import MaterialIconPushButton, MaterialColor, MaterialIconCheckbox

@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QDragEnterEvent, QDropEvent
 
 from scripts.find_folder import find_and_open_folder
+from styles.header import HeaderButtons
 from styles.material import MaterialIconPushButton, MaterialLineEdit, MaterialScrollArea
 from views import BaseView
 import utils as U
@@ -15,9 +16,9 @@ class FindFolderView(BaseView):
     def __init__(self, parent) -> None:
         super().__init__("Folder Search", parent)
 
-        self.add_button("back")
-        self.add_button("history", postion_left=False)
-        self.add_button("black_list_manager", postion_left=False)
+        self.add_button(HeaderButtons.BACK)
+        self.add_button(HeaderButtons.HISTORY, postion_left=False)
+        self.add_button(HeaderButtons.BL_MANAGER, postion_left=False)
 
         self.setAcceptDrops(True)
         self.height_input_field_and_accept_button: int = 50

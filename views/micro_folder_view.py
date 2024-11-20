@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QFont
 
 from scripts.get_micro_folder import PATHS, get_filtered_folders, move_small_file_count_folders
+from styles.header import HeaderButtons
 from styles.material import MaterialColor, MaterialIconPushButton, MaterialLineEdit, MaterialScrollArea
 from views import BaseView
 
@@ -15,7 +16,7 @@ class MicroFolderView(BaseView):
     def __init__(self, parent) -> None:
         super().__init__("Micro Folders Finder", parent)
 
-        self.add_button("back")
+        self.add_button(HeaderButtons.BACK)
 
         self.hbox: QHBoxLayout = QHBoxLayout()
         self.hbox.setContentsMargins(10, 10, 10, 10)

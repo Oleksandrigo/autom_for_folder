@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QFileDialog, QLab
 from PyQt5.QtCore import Qt
 
 from scripts.deleter_empty_folder_and_more import delete_from_black_list, get_bl_artist, get_new_name_folder, rename_folder
+from styles.header import HeaderButtons
 from styles.material import MaterialColor, MaterialIconPushButton, MaterialLineEdit, MaterialScrollArea, MaterialIconButton
 from styles.popups import AcceptPopup, MoveLogPopup
 from styles.popups.base_popup import Position, QSizeFloat
@@ -19,8 +20,8 @@ class BlackListFinderView(BaseView):
     def __init__(self, parent) -> None:
         super().__init__("Black List Finder", parent)
 
-        self.add_button("back")
-        self.add_button("black_list_manager", postion_left=False)
+        self.add_button(HeaderButtons.BACK)
+        self.add_button(HeaderButtons.BL_MANAGER, postion_left=False)
         
         data = U.load_data()
         path = data.setdefault("BLF_last_path", "")

@@ -1,5 +1,5 @@
-from pprint import pprint
 from typing import Generator, List, Optional, Tuple
+from styles.header import HeaderButtons
 from views.base_view import BaseView
 from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget, QVBoxLayout, QSizePolicy, QApplication
 from PyQt5.QtCore import Qt
@@ -20,7 +20,7 @@ class GetSameArtistsFoldersView(BaseView):
     def __init__(self, parent) -> None:
         super().__init__("Get Same Artists Folders", parent)
         
-        self.add_button("back")
+        self.add_button(HeaderButtons.BACK)
 
         self.hbox: QHBoxLayout = QHBoxLayout()
         self.hbox.setContentsMargins(10, 10, 10, 10)
