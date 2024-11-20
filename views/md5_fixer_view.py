@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List
 from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget, QVBoxLayout, QSizePolicy, QApplication
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt
 
 from scripts.md5_fixer import Config, delete_file, get_md5, rename_file, save_to_sqlite
 from styles.header import HeaderButtons

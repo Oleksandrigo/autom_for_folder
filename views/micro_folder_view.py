@@ -1,8 +1,7 @@
-from typing import Callable, Dict, List, Optional
+from typing import Dict, List, Optional
 
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QSizePolicy, QApplication, QGraphicsDropShadowEffect
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QSizePolicy, QApplication
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QFont
 
 from scripts.get_micro_folder import PATHS, get_filtered_folders, move_small_file_count_folders
 from styles.header import HeaderButtons

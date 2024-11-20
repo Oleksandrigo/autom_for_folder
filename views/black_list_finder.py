@@ -1,15 +1,14 @@
 import os
-from typing import Dict, List, Literal, Tuple
+from typing import List, Tuple
 
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QFileDialog, QLabel
 from PyQt5.QtCore import Qt
 
-from scripts.deleter_empty_folder_and_more import delete_from_black_list, get_bl_artist, get_new_name_folder, rename_folder
+from scripts.deleter_empty_folder_and_more import get_bl_artist, get_new_name_folder, rename_folder
 from styles.header import HeaderButtons
-from styles.material import MaterialColor, MaterialIconPushButton, MaterialLineEdit, MaterialScrollArea, MaterialIconButton
+from styles.material import MaterialColor, MaterialIconPushButton, MaterialLineEdit, MaterialScrollArea
 from styles.popups import AcceptPopup, MoveLogPopup
-from styles.popups.base_popup import Position, QSizeFloat
-from styles.popups.list_popup import ListPopup
+from styles.popups.base_popup import  QSizeFloat
 from views import BaseView
 import utils as U
 
