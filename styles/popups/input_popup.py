@@ -1,4 +1,3 @@
-from functools import partial
 from typing import Callable, Optional
 
 from PyQt5.QtWidgets import QVBoxLayout, QMainWindow, QLabel, QSizePolicy

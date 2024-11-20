@@ -94,6 +94,7 @@ lorianloc
 luna_hoshiduki_(voice_actor)
 macstarva
 magicalmysticva
+magicmicva
 mei_takehaya_(voice_actor)
 merurava
 midnight_datura
@@ -120,6 +121,7 @@ musi_cassie
 mymialovett
 nami955
 nekonyan
+nekonyan_vr
 nexus763
 nightlife
 nightshiftnyx_(voice_actor)
