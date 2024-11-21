@@ -75,7 +75,7 @@ class Md5FixerView(BaseView):
 
         data: Dict[str, str] = {}
         config: Config = Config()
-        paths: List[str] = ["D:\\Wallpapers", "E:\\Video", "E:\\GIFS"]
+        paths: List[str] = ["D:\\Wallpapers", "E:\\Video", "E:\\GIFS", "E:\\PSEUDO_GIFS"]
         self.start_button.setEnabled(False)
         
         for path in paths:
