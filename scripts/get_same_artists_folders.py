@@ -1,8 +1,7 @@
 import os
 import re
 import shutil
-from pprint import pprint
-from typing import Generator, List, Dict, Set, Tuple
+from typing import Generator, List, Dict, Tuple
 from dataclasses import dataclass
 
 from fuzzywuzzy import fuzz
@@ -108,8 +107,7 @@ def remove_artist_keyword(folder_name: str) -> str:
     return res
 
 
-
-def load_list(file_path: str) -> Tuple[Set[Tuple[str, str]], Set[Tuple[str, str]]]:
+def load_list(file_path: str) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
     if not os.path.exists(file_path):
         return set(), set()
     
@@ -132,7 +130,7 @@ def load_list(file_path: str) -> Tuple[Set[Tuple[str, str]], Set[Tuple[str, str]
                 elif current_list == 'whitelist':
                     whitelist.add(item)
 
-    return whitelist, blacklist
+    return list(whitelist), list(blacklist)
 
 
 def save_to_list(file_path: str, folder: str, key: str, is_whitelist: bool) -> None:
@@ -157,8 +155,8 @@ def save_to_list(file_path: str, folder: str, key: str, is_whitelist: bool) -> N
 def compare_folders(
     sorted_folders_list: List[Tuple[Tuple[str, str], str]],
     folders_dict: Dict[str, List[Tuple[str, str]]],
-    whitelist: Set[Tuple[str, str]],
-    blacklist: Set[Tuple[str, str]],
+    whitelist: List[Tuple[str, str]],
+    blacklist: List[Tuple[str, str]],
 ) -> Generator[Tuple[str, str, int, Tuple[str, str]], bool, List[Match]]:
     def add_to_matches(match: Match) -> None:
         if match not in matches:
