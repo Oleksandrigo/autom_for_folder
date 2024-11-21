@@ -5,6 +5,7 @@ import sqlite3
 import hashlib
 from typing import List, Dict, Tuple
 from dataclasses import dataclass, field
+from send2trash import send2trash
 
 BACKUP_DIR = "backups"
 
@@ -80,12 +81,15 @@ def rename_file(source_file_path: str, new_file_name: str, fake_rename: bool = F
         log += f"Error renaming file: {e}"
         return source_file_path, log
 
-def delete_file(file_path: str, fake_delete: bool = False) -> str:
+def delete_file(file_path: str, fake_delete: bool = False, to_trashcan: bool = True) -> str:
     log = ""
     if os.path.exists(file_path):
         try:
             if not fake_delete:
-                os.remove(file_path)
+                if to_trashcan:
+                    send2trash(file_path)
+                else:
+                    os.remove(file_path)
             log = f"Removed file: {file_path}"
         except Exception as e:
             log += f"Error: {e}"
