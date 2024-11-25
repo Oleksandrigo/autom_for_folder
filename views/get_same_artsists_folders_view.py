@@ -1,4 +1,4 @@
-from typing import Generator, List, Optional, Tuple
+from typing import Dict, Generator, List, Literal, Optional, Tuple
 from styles.header import HeaderButtons
 from views.base_view import BaseView
 from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget, QVBoxLayout, QSizePolicy, QApplication
@@ -10,7 +10,7 @@ from scripts.get_same_artists_folders import (
     BL_WL_LIST_FILE, PATHS, clean_folders_list, compare_folders, create_folders_dict,
     get_folders_list, get_new_folders_list, load_list, save_to_list, Match, move_matched_folders
 )
-from styles.material import MaterialColor, MaterialIconPushButton, MaterialScrollArea
+from styles.material import MaterialColor, MaterialIconButton, MaterialIconPushButton, MaterialScrollArea
 from styles.popups import AcceptPopup
 
 
@@ -21,6 +21,27 @@ class GetSameArtistsFoldersView(BaseView):
         super().__init__("Get Same Artists Folders", parent)
         
         self.add_button(HeaderButtons.BACK)
+
+        def open_list_menu():
+            def delete_from_list(category_list, pair, fake_delete):
+                print(category_list)
+                print(pair)
+
+
+            from styles.popups.base_popup import Position
+            from styles.popups.list_popup import ListPopup
+            whitelist, blacklist = load_list(BL_WL_LIST_FILE)
+            _whitilist = []
+            for wl_l, wl_r in whitelist:
+                _whitilist.append(f"{wl_l},{wl_r}")
+            __data_dict = {"WL": _whitilist, "BL": ["pass"]}
+
+            list_popup = ListPopup(self, "_", __data_dict, delete_from_list, position=Position.CENTER, size=U.QSizeFloat(0.4, 0.8))
+            list_popup.show()
+
+        button = MaterialIconButton(self, "settings_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg")
+        button.clicked.connect(open_list_menu)
+        self.add_button(button, postion_left=False)
 
         self.hbox: QHBoxLayout = QHBoxLayout()
         self.hbox.setContentsMargins(10, 10, 10, 10)

@@ -66,6 +66,10 @@ class MainView(BaseView):
         self.md5_fixer_button.clicked.connect(lambda: self.main_window.change_view(self.main_window.md5_fixer_view))
         self.button_layout.addWidget(self.md5_fixer_button)
 
+        self.same_ext_button: MaterialIconPushButton = MaterialIconPushButton(self, "Same Extensions", size=button_size)
+        self.same_ext_button.clicked.connect(lambda: self.main_window.change_view(self.main_window.same_ext_view))
+        self.button_layout.addWidget(self.same_ext_button)
+
         self.settings_container: QWidget = QWidget()
         self.settings_container.setObjectName("MW_button_container")
         hbox_layout.addWidget(self.settings_container, stretch=1)

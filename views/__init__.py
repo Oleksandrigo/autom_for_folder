@@ -7,3 +7,4 @@ from .get_same_artsists_folders_view import GetSameArtistsFoldersView
 from .micro_folder_view import MicroFolderView
 from .md5_fixer_view import Md5FixerView
 from .video_comparison_view import VideoComparisonView
+from .same_ext_view import SameExtView

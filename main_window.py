@@ -6,7 +6,6 @@ from PyQt5.QtGui import QResizeEvent
 
 if TYPE_CHECKING:
     from views.base_view import BaseView
-    from styles.material import MaterialIconButton
 
 from scripts.deleter_empty_folder_and_more import delete_from_black_list, get_bl_artist
 from utils import QSizeFloat, deduplicator
@@ -22,7 +21,8 @@ class MainWindow(QMainWindow):
             BlackListFinderView,
             GetSameArtistsFoldersView,
             MicroFolderView,
-            Md5FixerView
+            Md5FixerView,
+            SameExtView
         )
         
         super().__init__()
@@ -49,6 +49,8 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.micro_folder_view)
         self.md5_fixer_view: Md5FixerView = Md5FixerView(self)
         self.stacked_widget.addWidget(self.md5_fixer_view)
+        self.same_ext_view: SameExtView = SameExtView(self)
+        self.stacked_widget.addWidget(self.same_ext_view)
         
         self.search_history: List[str] = []
 
