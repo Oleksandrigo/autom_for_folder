@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 
 from scripts.md5_fixer import Config, delete_file, get_md5, rename_file, save_to_sqlite
 from styles.header import HeaderButtons
-from styles.material import MaterialColor, MaterialIconPushButton, MaterialScrollArea
+from styles.material import MaterialColor, MaterialIconCheckbox, MaterialIconPushButton, MaterialScrollArea
 from styles.popups import AcceptPopup
 from styles.popups.accept_popup import ExtraButton
 from utils import QSizeFloat
@@ -61,6 +61,11 @@ class Md5FixerView(BaseView):
         self.start_button.clicked.connect(self.start_fix)
         self.button_layout.addWidget(self.start_button)
 
+        self.auto_rename_checkbox: MaterialIconCheckbox = MaterialIconCheckbox()
+        self.auto_rename_checkbox.setText("Auto Rename")
+        self.auto_rename_checkbox.setChecked(Qt.CheckState.Checked)
+        self.button_layout.addWidget(self.auto_rename_checkbox)
+
 
     def clear_layout(self):
         self.log_widget.clear()
@@ -75,6 +80,9 @@ class Md5FixerView(BaseView):
 
         data: Dict[str, str] = {}
         config: Config = Config()
+        if self.auto_rename_checkbox.isChecked():
+            config.set_rename_all(True)
+
         paths: List[str] = ["D:\\Wallpapers", "E:\\Video", "E:\\GIFS", "E:\\PSEUDO_GIFS"]
         self.start_button.setEnabled(False)
         
