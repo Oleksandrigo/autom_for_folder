@@ -114,6 +114,9 @@ class MaterialLineEdit(QLineEdit, MaterialColor):
     def __init__(self, parent = None, **kwargs) -> None:
         super().__init__(parent)
 
+        height = kwargs.get("height", 50)
+        self.setFixedHeight(height)
+
         font_size = kwargs.get("font_size", 16)
         padding = kwargs.get("padding", 12)
         border_radius = kwargs.get("border_radius", 4)
