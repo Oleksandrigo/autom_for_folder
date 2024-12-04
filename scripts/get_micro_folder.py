@@ -8,7 +8,7 @@ PATHS: List[str] = [
 ]
 
 SMALL_FILE_COUNT_FOLDER: str = "!SmallFileCount"
-EXCLUDE_FOLDERS: List[str] = ["!new", "!SmallFileCount"]
+EXCLUDE_FOLDERS: List[str] = ["!new", SMALL_FILE_COUNT_FOLDER]
 
 
 def get_filtered_folders(paths: List[str], min_file_count: int = 5) -> Dict[str, int]:
