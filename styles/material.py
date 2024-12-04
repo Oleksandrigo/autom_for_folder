@@ -103,9 +103,9 @@ class MaterialScrollArea(QScrollArea, MaterialColor):
     def resizeEvent(self, event) -> None:
         super().resizeEvent(event)
         if self.scroll_to_bottom:
-            self.scrollToBottom()
+            self._scroll_to_bottom()
 
-    def scrollToBottom(self) -> None:
+    def _scroll_to_bottom(self) -> None:
         self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
 
 
@@ -144,6 +144,7 @@ class MaterialIconPushButton(QPushButton, MaterialColor):
         special: bool = kwargs.get("special", False)
         size: QSize = kwargs.get("size", None)
         height: int = kwargs.get("height", None)
+        width: int = kwargs.get("width", None)
         shadow: bool = kwargs.get("shadow", False)
         font_size: int = kwargs.get("font_size", 14)
         background_color: str = kwargs.get("background_color", self.primary_color if not special else self.special_color)
@@ -160,6 +161,8 @@ class MaterialIconPushButton(QPushButton, MaterialColor):
             self.setFixedSize(size)
         if height:
             self.setFixedHeight(height)
+        if width:
+            self.setFixedWidth(width)
         
         self.setText(text)
         self.setFont(QFont(r"src\fonts\roboto\Roboto-Regular.ttf", font_size, QFont.Bold))
