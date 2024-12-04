@@ -1,4 +1,4 @@
-from typing import Dict, Generator, List, Literal, Optional, Tuple
+from typing import Dict, Generator, List, Optional, Tuple
 from styles.header import HeaderButtons
 from views.base_view import BaseView
 from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget, QVBoxLayout, QSizePolicy, QApplication
