@@ -55,9 +55,9 @@ class TabPanel(QWidget):
 
         for i in range(100):
             tab = ScrollableButton(scroll_area=self.scroll_tabs, text="123", height=40, width=140)
-            tab.setMouseTracking(True)  # Enable mouse tracking for the button
-            tab.enterEvent = self.scroll_tabs.enterEvent  # Link enter event to scroll
-            tab.leaveEvent = self.scroll_tabs.leaveEvent  # Link leave event to scroll
+            tab.setMouseTracking(True)
+            tab.enterEvent = self.scroll_tabs.enterEvent
+            tab.leaveEvent = self.scroll_tabs.leaveEvent
 
             self.tabs_hbox.addWidget(tab)
 
