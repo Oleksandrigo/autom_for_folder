@@ -137,11 +137,14 @@ def save_to_list(file_path: str, folder: str, key: str, is_whitelist: bool) -> N
     whitelist, blacklist = load_list(file_path)
 
     if is_whitelist:
-        whitelist.add((folder, key))
+        whitelist.append((folder, key))
         print(f"Added to whitelist: {folder} - {key}")
     else:
-        blacklist.add((folder, key))
+        blacklist.append((folder, key))
         print(f"Added to blacklist: {folder} - {key}")
+    
+    whitelist = list(set(whitelist))
+    blacklist = list(set(blacklist))
 
     with open(file_path, "w") as f:
         f.write("## blacklist\n")
