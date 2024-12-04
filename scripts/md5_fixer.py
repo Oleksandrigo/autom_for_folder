@@ -97,4 +97,3 @@ def delete_file(file_path: str, fake_delete: bool = False, to_trashcan: bool = T
         log += f"File not found: {file_path}"
 
     return log
-    
