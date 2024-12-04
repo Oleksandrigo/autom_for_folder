@@ -1,4 +1,5 @@
 import os
+import re
 from typing import Dict, List
 from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget, QVBoxLayout, QSizePolicy, QApplication
 from PyQt5.QtCore import Qt
@@ -103,9 +104,25 @@ class Md5FixerView(BaseView):
         log = save_to_sqlite(data, db_path, fake_save=self.main_window.fake_delete)
         self.log_widget.setText(f"{self.log_widget.text()}{log}\n")
         self.start_button.setEnabled(True)
-        self.scroll_area.scrollToBottom()
+        self.scroll_area._scroll_to_bottom()
 
     def process_file(self, dirpath: str, file: str, config: Config, data: dict) -> bool | None:
+        def fit_to_window(input_string: str, max_chars: int = 60) -> str:
+            parts: List[str] = re.split(r'([+\\])', input_string)
+            result: str = ""
+            current_line: str = ""
+
+            for part in parts:
+                if len(current_line) + len(part) + 1 > max_chars:
+                    result += current_line + "\n"
+                    current_line = part
+                else:
+                    current_line += part
+
+            result += current_line.strip()
+            return result
+
+
         _stop_scan = False
 
         def pre_rename(self: "Md5FixerView", _file_path: str, md5_check: str) -> str:
@@ -169,12 +186,12 @@ class Md5FixerView(BaseView):
                     print(f"File {path} needs to be renamed to {md5}")
                     new_path = pre_rename(self, path, md5)
                     paths[num] = new_path
-
+            
             accept_popup: AcceptPopup = self.main_window.show_accept_popup(
                 message=(
                     f"File:  ->  {os.path.basename(file_path)}\nAlready exists in DB:\nDelete:\n"
-                    f"1) {paths[0]}\n"
-                    f"2) {paths[1]}"
+                    f"1) {fit_to_window(paths[0])}\n"
+                    f"2) {fit_to_window(paths[1])}"
                 ),
                 accept_text="Delete 1",
                 accept_connect=lambda: pre_delete(self, paths[0]),
