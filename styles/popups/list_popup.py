@@ -1,7 +1,7 @@
 from typing import Callable, Dict, List, Literal, Optional
 from functools import partial
 
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QBoxLayout
 from PyQt5.QtCore import Qt, QPoint, QMargins
 
 from main_window import MainWindow
@@ -76,19 +76,22 @@ class ListPopup(BasePopup):
         """)
         self.scroll_area.setWidget(self.scroll_widget)
 
-        self.scroll_layout = QVBoxLayout()
+        self.scroll_layout: QVBoxLayout = QVBoxLayout()
         self.scroll_layout.setContentsMargins(0, 0, 0, 0)
         self.scroll_layout.setSpacing(5)
         self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.scroll_widget.setLayout(self.scroll_layout)
 
         self.update_layout(self.list_data if isinstance(self.list_data, list) else self.list_data[list(self.list_data.keys())[0]])
-
+    
     def clear_layout(self) -> None:
-        childs = U.get_hidden_children(self.scroll_layout)
-        for child in childs:
-            child.hide()
-            child.deleteLater()
+        childs: List[QBoxLayout] = self.scroll_layout.children()
+        for i in childs:
+            sub_childs = U.get_hidden_children(i)
+            for j in sub_childs:
+                j.deleteLater()
+                j.hide()
+            i.deleteLater
 
     def update_layout(self, list_data: List[str]) -> None:
         self.clear_layout()
