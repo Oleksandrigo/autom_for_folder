@@ -39,6 +39,7 @@ dickmagusvo
 dickmagusvo_(voice_actor)
 donmaskedup
 dornva
+eleetapricot
 empressblueva
 endymion_(voice_actor)
 endymionva
@@ -118,6 +119,7 @@ mizz_peachy_(voice_actor)
 mizzpeachy
 mizzypeachy
 mknymym_(voice_actor)
+mocalamy
 momiji_hraezla
 musi_cassie
 mymialovett
@@ -163,6 +165,7 @@ shennychwan
 sia_mofu
 silkymilk
 silkymilk_(voice_actor)
+sinnthaudio
 sonia_va_(voice_actor)
 spankmeaudio
 spicy_rabbit_(voice_actor)
