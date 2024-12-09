@@ -38,21 +38,6 @@ def get_index_in_layout(widget: QWidget) -> int:
     parent: QLayout = widget.parent()
     return parent.layout().indexOf(widget)
 
-def delete_childrens(node: QWidget | QBoxLayout):
-    if type(node) is QWidget:
-        childs: List = get_hidden_children(node)
-        
-    
-    elif type(node) is QBoxLayout:
-        childs: List[QBoxLayout] = node.children()
-
-        # for i in childs:
-        #     sub_childs = get_hidden_children(i)
-        #     for j in sub_childs:
-        #         j.deleteLater()
-        #         j.hide()
-        #     i.deleteLater
-
 def get_hidden_children(widget_for_search: QWidget) -> List[QWidget]:
     result: List[QWidget] = []
     for i in reversed(range(widget_for_search.count())):

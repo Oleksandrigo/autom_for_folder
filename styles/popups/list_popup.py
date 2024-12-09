@@ -1,4 +1,4 @@
-from typing import Callable, Dict, List, Literal, Optional
+from typing import Callable, Dict, List, Optional
 from functools import partial
 
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QBoxLayout
@@ -6,7 +6,6 @@ from PyQt5.QtCore import Qt, QPoint, QMargins
 
 from main_window import MainWindow
 from scripts.deleter_empty_folder_and_more import get_bl_artist
-from styles.popups.accept_popup import AcceptPopup
 from styles.popups.base_popup import BasePopup, Position
 from styles.popups.input_popup import InputPopup
 from styles.material import MaterialColor, MaterialIconPushButton, MaterialScrollArea
