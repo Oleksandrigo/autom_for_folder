@@ -1,9 +1,10 @@
 import json
 import os
 from typing import Callable, Dict, List, Optional, Tuple
-from PyQt5.QtWidgets import QApplication, QWidget, QLayout
-from PyQt5.QtCore import QFile, QTextStream, QSize, QRect
-from PyQt5.QtGui import QFontDatabase, QFont, QIcon, QPixmap, QColor, QPainter
+
+from PyQt5.QtWidgets import QApplication, QWidget, QLayout, QBoxLayout
+from PyQt5.QtCore import QSize, QRect
+from PyQt5.QtGui import QIcon, QPixmap, QColor, QPainter
 from PyQt5.QtSvg import QSvgGenerator
 
 
@@ -37,6 +38,21 @@ def get_index_in_layout(widget: QWidget) -> int:
     parent: QLayout = widget.parent()
     return parent.layout().indexOf(widget)
 
+def delete_childrens(node: QWidget | QBoxLayout):
+    if type(node) is QWidget:
+        childs: List = get_hidden_children(node)
+        
+    
+    elif type(node) is QBoxLayout:
+        childs: List[QBoxLayout] = node.children()
+
+        # for i in childs:
+        #     sub_childs = get_hidden_children(i)
+        #     for j in sub_childs:
+        #         j.deleteLater()
+        #         j.hide()
+        #     i.deleteLater
+
 def get_hidden_children(widget_for_search: QWidget) -> List[QWidget]:
     result: List[QWidget] = []
     for i in reversed(range(widget_for_search.count())):
@@ -56,23 +72,6 @@ def load_data() -> Dict:
 def save_data(data: Dict) -> None:
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-
-def set_material_style(app: QApplication) -> None:
-    font_id = QFontDatabase.addApplicationFont("src/fonts/roboto/Roboto-Regular.ttf")
-    if font_id != -1:
-        font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
-        app.setFont(QFont(font_family, 10))
-    else:
-        print("Error: Failed to load Roboto font.")
-
-    app.setStyle("Fusion")
-    
-    style_file = QFile("styles/material_style.qss")
-    if style_file.open(QFile.ReadOnly | QFile.Text):
-        stream = QTextStream(style_file)
-        app.setStyleSheet(stream.readAll())
-    else:
-        print("Error: Failed to load style sheet.")
 
 def create_white_icon(icon_file: str, icon_size: QSize) -> Tuple[QIcon, str]:
     pre_path: str = os.path.join("src", "icons")
