@@ -12,12 +12,12 @@ class MaterialColor:
     accent_color = "#448AFF"
     hover_accent_color = "#007BFF"
     pressed_accent_color = "#0056B3"
-    text_color = "#FFFFFF" # white
-    primary_text_color = "#212121" # slightly black
-    secondary_text_color = "#757575" # gray
-    divider_color = "#BDBDBD" # light gray
+    text_color = "#FFFFFF"
+    primary_text_color = "#212121"
+    secondary_text_color = "#757575"
+    divider_color = "#BDBDBD"
 
-    special_color = "#4CAF50" # green
+    special_color = "#4CAF50"
     semi_transparent_black = "rgba(40, 40, 40, 200)"
     transparent_color = "rgba(0, 0, 0, 0)"
 
@@ -159,10 +159,11 @@ class MaterialIconPushButton(QPushButton, MaterialColor):
 
         if size:
             self.setFixedSize(size)
-        if height:
-            self.setFixedHeight(height)
-        if width:
-            self.setFixedWidth(width)
+        else:
+            if height:
+                self.setFixedHeight(height)
+            if width:
+                self.setFixedWidth(width)
         
         self.setText(text)
         self.setFont(QFont(r"src\fonts\roboto\Roboto-Regular.ttf", font_size, QFont.Bold))
