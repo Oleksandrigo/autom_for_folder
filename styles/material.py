@@ -121,7 +121,6 @@ class MaterialLineEdit(QLineEdit, MaterialColor):
         padding = kwargs.get("padding", 12)
         border_radius = kwargs.get("border_radius", 4)
 
-        self.setObjectName("MaterialLineEdit")
         self.setStyleSheet(f"""
             QLineEdit {{
                 background-color: {self.primary_text_color};
