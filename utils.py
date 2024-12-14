@@ -40,11 +40,27 @@ def get_index_in_layout(widget: QWidget) -> int:
 
 def get_hidden_children(widget_for_search: QWidget) -> List[QWidget]:
     result: List[QWidget] = []
-    for i in reversed(range(widget_for_search.count())):
-        widget: QWidget = widget_for_search.itemAt(i).widget()
-        if widget is not None:
-            result.append(widget)
+    try:
+        for i in reversed(range(widget_for_search.count())):
+            widget: QWidget = widget_for_search.itemAt(i).widget()
+            if widget is not None:
+                result.append(widget)
+    except AttributeError as e:
+        print(e)
     return result
+
+def remove_all_children(node: QWidget | QBoxLayout, del_cur_node: bool = False) -> None:
+    """Recursively remove all children from the given widget or QBoxLayout."""
+    childs_base = node.children()
+    childs_hide = get_hidden_children(node)
+
+    for child in childs_base + childs_hide:
+        remove_all_children(child, True)
+    
+    if del_cur_node:
+        if isinstance(node, QWidget):
+            node.hide()
+        node.deleteLater()
 
 def load_data() -> Dict:
     try:
