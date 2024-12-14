@@ -1,7 +1,9 @@
+from typing import Any, Dict
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 from PyQt5.QtCore import Qt
 
 from styles.material import MaterialColor, MaterialIconPushButton, MaterialScrollArea
+import utils as U
 
 class ScrollableButton(MaterialIconPushButton):
     def __init__(self, scroll_area, *args, **kwargs) -> None:
@@ -50,19 +52,36 @@ class TabPanel(QWidget):
         self.scroll_tabs.setWidget(self.scroll_widget)
 
         self.tabs_hbox = QHBoxLayout()
+        self.tabs_hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.tabs_hbox.setSpacing(0)
         self.scroll_widget.setLayout(self.tabs_hbox)
 
-        for i in range(100):
-            tab = ScrollableButton(scroll_area=self.scroll_tabs, text="123", height=40, width=140)
-            tab.setMouseTracking(True)
-            tab.enterEvent = self.scroll_tabs.enterEvent
-            tab.leaveEvent = self.scroll_tabs.leaveEvent
+        self.add_tab("default")
 
+        self.content = QVBoxLayout()
+        self.vbox.addLayout(self.content, stretch=9)
+
+        self.ph = QWidget()
+        self.content.addWidget(self.ph)
+    
+    def clear_all(self):
+        U.remove_all_children(self.tabs_hbox)
+
+    def add_tab(self, text: str, auto_add: bool = True) -> ScrollableButton | None:
+        tab = ScrollableButton(scroll_area=self.scroll_tabs, text=text, height=40, width=140)
+        tab.setMouseTracking(True)
+        tab.enterEvent = self.scroll_tabs.enterEvent
+        tab.leaveEvent = self.scroll_tabs.leaveEvent
+
+        if auto_add:
             self.tabs_hbox.addWidget(tab)
+        else:
+            return tab
+    
+    def create_(self, data: Dict[str, Any]):
+        self.clear_all()
 
-        self.data_from_tabs = QVBoxLayout()
-        self.vbox.addLayout(self.data_from_tabs, stretch=9)
-
-        self.s = QWidget()
-        self.data_from_tabs.addWidget(self.s)
+        for tab_name, datas in data.items():
+            new_tab = self.add_tab(tab_name)
+            self.tabs_hbox.addWidget(new_tab)
+            # TODO ...
