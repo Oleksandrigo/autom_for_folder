@@ -12,6 +12,8 @@ from styles.popups.accept_popup import ExtraButton
 from utils import QSizeFloat
 from views import BaseView
 
+PATH_SCAN: List[str] = ["D:\\Wallpapers", "E:\\Video", "E:\\GIFS", "E:\\PSEUDO_GIFS"]
+
 
 class Md5FixerView(BaseView):
     def __init__(self, parent) -> None:
@@ -84,10 +86,9 @@ class Md5FixerView(BaseView):
         if self.auto_rename_checkbox.isChecked():
             config.set_rename_all(True)
 
-        paths: List[str] = ["D:\\Wallpapers", "E:\\Video", "E:\\GIFS", "E:\\PSEUDO_GIFS"]
         self.start_button.setEnabled(False)
         
-        for path in paths:
+        for path in PATH_SCAN:
             for dirpath, _, files in os.walk(path):
                 for file in files:
                     if file.endswith('.lnk'):
